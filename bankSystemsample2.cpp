@@ -1,7 +1,3 @@
-//
-// Created by User on 4/29/2023.
-//
-
 #include<conio.h>
 #include<stdio.h>
 #include<iostream>
