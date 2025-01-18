@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+
     array<int, 3> arr = {3, 2, 1};
 
     cout << *(arr.begin() + 2) << endl;
