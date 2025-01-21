@@ -176,6 +176,13 @@ int main() {
 }
 ```
 
+### Class Interface
+
+Separating a class interface into a header file in C++ is a standard practice for organizing code. It improves readability, reusability, and maintainability. Here's a step-by-step guide:
+
+Header File (ClassName.h): Contains the class declaration (interface).
+Source File (ClassName.cpp): Contains the class definition (implementation).
+
 ### Header File: Example.h
 
 ```cpp

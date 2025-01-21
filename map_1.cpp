@@ -2,7 +2,8 @@
 #include <map>
 #include <string>
 
-int main() {
+int main()
+{
     // Create a map where keys are strings and values are integers
     std::map<std::string, int> age;
 
@@ -15,14 +16,18 @@ int main() {
     std::cout << "Alice's age: " << age["Alice"] << std::endl;
 
     // Iterate over the map
-    for (const auto& pair : age) {
+    for (const auto &pair : age)
+    {
         std::cout << pair.first << " is " << pair.second << " years old." << std::endl;
     }
 
     // Find an element
-    if (age.find("Bob") != age.end()) {
+    if (age.find("Bob") != age.end())
+    {
         std::cout << "Bob is found, age: " << age["Bob"] << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Bob is not found." << std::endl;
     }
 
