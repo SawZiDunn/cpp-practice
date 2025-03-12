@@ -13,11 +13,12 @@ public:
     // Deep copy assignment operator
     MyClass &operator=(const MyClass &other)
     {
-        if (this != &other)
-        {                // prevents self-assignment
+        if (this != &other) // prevents self-assignment
+        {
             delete data; // Avoid memory leak
             data = new int(*other.data);
         }
+
         return *this;
     }
 
@@ -28,11 +29,11 @@ int main()
 {
     // Create two MyClass objects
     MyClass obj1(5);
-    MyClass obj2(10);
+    MyClass obj2{10};
 
     // Print initial values
-    std::cout << "obj1.data: " << *obj1.data << std::endl; // Output: 5
-    std::cout << "obj2.data: " << *obj2.data << std::endl; // Output: 10
+    std::cout << "obj1.data: " << *(obj1.data) << std::endl; // Output: 5
+    std::cout << "obj2.data: " << *obj2.data << std::endl;   // Output: 10
 
     // Perform deep copy assignment
     obj1 = obj2;

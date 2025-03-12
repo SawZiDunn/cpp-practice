@@ -3,17 +3,18 @@
 #include <stdexcept> // Include for std::invalid_argument
 
 // Date.h content
-class Date {
-    friend std::ostream& operator<<(std::ostream&, const Date&);
+class Date
+{
+    friend std::ostream &operator<<(std::ostream &, const Date &);
 
 public:
     Date(int m = 1, int d = 1, int y = 1900); // default constructor
-    void setDate(int, int, int); // set month, day, year
-    Date& operator++(); // prefix increment operator
-    Date operator++(int); // postfix increment operator
-    Date& operator+=(unsigned int); // add days, modify object
-    static bool leapYear(int); // is year a leap year?
-    bool endOfMonth(int) const; // is day at the end of month?
+    void setDate(int, int, int);              // set month, day, year
+    Date &operator++();                       // prefix increment operator
+    Date operator++(int);                     // postfix increment operator
+    Date &operator+=(unsigned int);           // add days, modify object
+    static bool leapYear(int);                // is year a leap year?
+    bool endOfMonth(int) const;               // is day at the end of month?
 
 private:
     unsigned int month;
@@ -21,74 +22,101 @@ private:
     unsigned int year;
 
     static const std::array<unsigned int, 13> days; // days per month
-    void helpIncrement(); // utility function for incrementing date
+    void helpIncrement();                           // utility function for incrementing date
 };
 
 // Date.cpp content
 const std::array<unsigned int, 13> Date::days{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-Date::Date(int month, int day, int year) {
+Date::Date(int month, int day, int year)
+{
     setDate(month, day, year);
 }
 
-void Date::setDate(int mm, int dd, int yy) {
-    if(mm >= 1 && mm <= 12) {
+void Date::setDate(int mm, int dd, int yy)
+{
+    if (mm >= 1 && mm <= 12)
+    {
         month = mm;
-    } else {
+    }
+    else
+    {
         throw std::invalid_argument{"Month must be 1-12"};
     }
 
-    if(yy >= 1900 && yy <= 2100) {
+    if (yy >= 1900 && yy <= 2100)
+    {
         year = yy;
-    } else {
+    }
+    else
+    {
         throw std::invalid_argument{"Year must be >= 1900 and <= 2100"};
     }
 
-    if ((month == 2 && leapYear(year) && dd >= 1 && dd <= 29) || (dd >= 1 && dd <= days[month])) {
+    if ((month == 2 && leapYear(year) && dd >= 1 && dd <= 29) || (dd >= 1 && dd <= days[month]))
+    {
         day = dd;
-    } else {
+    }
+    else
+    {
         throw std::invalid_argument{"Day is out of range for current month and year"};
     }
 }
 
-Date& Date::operator++() {
+Date &Date::operator++()
+{
     helpIncrement();
     return *this;
 }
 
-Date Date::operator++(int) {
+Date Date::operator++(int)
+{
     Date temp{*this};
     helpIncrement();
     return temp;
 }
 
-Date& Date::operator+=(unsigned int additionalDays) {
-    for (unsigned int i = 0; i < additionalDays; ++i) {
+Date &Date::operator+=(unsigned int additionalDays)
+{
+    for (unsigned int i = 0; i < additionalDays; ++i)
+    {
         helpIncrement();
     }
     return *this;
 }
 
-bool Date::leapYear(int testYear) {
+bool Date::leapYear(int testYear)
+{
     return (testYear % 400 == 0 || (testYear % 100 != 0 && testYear % 4 == 0));
 }
 
-bool Date::endOfMonth(int testDay) const {
-    if (month == 2 && leapYear(year)) {
+bool Date::endOfMonth(int testDay) const
+{
+    if (month == 2 && leapYear(year))
+    {
         return testDay == 29;
-    } else {
+    }
+    else
+    {
         return testDay == days[month];
     }
 }
 
-void Date::helpIncrement() {
-    if (!endOfMonth(day)) {
+void Date::helpIncrement()
+{
+    if (!endOfMonth(day))
+    {
         ++day;
-    } else {
-        if(month < 12) {
+    }
+    else
+    {
+        if (month < 12)
+        {
             ++month;
             day = 1;
-        } else {
+        }
+        else
+        {
             ++year;
             month = 1;
             day = 1;
@@ -96,17 +124,19 @@ void Date::helpIncrement() {
     }
 }
 
-std::ostream& operator<<(std::ostream& output, const Date& d) {
-    static const char* monthName[13] = {"", "January", "February", "March", "April", "May", "June",
+std::ostream &operator<<(std::ostream &output, const Date &d)
+{
+    static const char *monthName[13] = {"", "January", "February", "March", "April", "May", "June",
                                         "July", "August", "September", "October", "November", "December"};
     output << monthName[d.month] << ' ' << d.day << ", " << d.year;
     return output;
 }
 
 // main.cpp content
-int main() {
+int main()
+{
     Date d1{12, 27, 2010}; // December 27, 2010
-    Date d2; // defaults to January 1, 1900
+    Date d2;               // defaults to January 1, 1900
 
     std::cout << "d1 is " << d1 << "\nd2 is " << d2 << "\n";
     std::cout << "\n\nd1 += 7 is " << (d1 += 7) << "\n";

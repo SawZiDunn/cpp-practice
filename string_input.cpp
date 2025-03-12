@@ -18,7 +18,7 @@ int main()
     cout << "String b: ";
     getline(cin, b);
 
-    cout << '\n';
+    cout << endl;
 
     cout << "a: " << a << endl;
     ;
