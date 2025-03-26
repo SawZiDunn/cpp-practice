@@ -12,7 +12,7 @@ public:
     if allocated on stack, both parent, child destructors are called, virtual destuctor is useless.
     */
 
-    virtual ~Animal()
+    virtual ~Animal() // virtual destructor for proper clean up
 
     {
         cout << "Animal Destructor called" << endl;
@@ -20,6 +20,7 @@ public:
 
     virtual void speak()
     {
+        cout << "Some generic animal sound" << endl;
     }
 };
 
@@ -33,6 +34,8 @@ public:
         cout << "Dog Destructor called!" << endl;
     }
 
+    // override virtual function from base class
+
     void speak() override
     {
         cout << "Barking" << endl;
@@ -42,7 +45,9 @@ public:
 int main()
 {
     // Dog dog{};
+    // base class pointer pointing to child class object
     Animal *animal = new Dog(); // &dog
+    animal->speak();            // calls Dog::speak(), not Animal::speak() due to polymorphism
     delete animal;
 
     return 0;
